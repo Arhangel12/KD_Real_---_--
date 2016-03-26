@@ -1,0 +1,15 @@
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real\KD_Real\bin\Debug\KD_Real.dll
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real\KD_Real\bin\Debug\KD_Real.pdb
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real\KD_Real\obj\Debug\KD_Real.dll
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real\KD_Real\obj\Debug\KD_Real.pdb
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real\KD_Real\obj\Debug\KD_Real.csprojResolveAssemblyReference.cache
+J:\Работа с БД\KD_Real\KD_Real\obj\Debug\ResolveAssemblyReference.cache
+J:\Работа с БД\KD_Real\KD_Real\obj\Debug\KD_Real.dll
+J:\Работа с БД\KD_Real\KD_Real\obj\Debug\KD_Real.pdb
+J:\Работа с БД\KD_Real\KD_Real\bin\Debug\KD_Real.dll
+J:\Работа с БД\KD_Real\KD_Real\bin\Debug\KD_Real.pdb
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\bin\Debug\KD_Real.dll
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\bin\Debug\KD_Real.pdb
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.csprojResolveAssemblyReference.cache
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.dll
+C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.pdb
