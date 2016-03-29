@@ -11,7 +11,6 @@ namespace KD_Real
     {
         private string ChangePassString(string Pass)
         {
-            
             PassChar pc = new PassChar();
             if (Pass.Length<9)
             {
@@ -145,12 +144,12 @@ namespace KD_Real
             if (Mixing)
             {
                 //тут вставляем символ пароля в сообщение начиная с нулевой позиции, затем + 2
-                for (int i = 0; i < PLength; i++,start+=2)
+                for (int i = 0; i < PLength; i++, start+=2)
                 {
                     if(start >= buld.Length) start = 0;
                     buld.Insert(start, PassLength[i]);
                 }
-                if (buld.Length < 4) buld.Append(' ', 4);
+                if (buld.Length < 4) buld.Append('~', 4);
                 end = buld.Length/4;
                 start = 0;
                 string[] block = new string[4];
@@ -181,7 +180,7 @@ namespace KD_Real
                     block[1] = buf;
                 }
             }
-                //разшифровываем
+                //расшифровываем
             else
             {
                 string[] block = new string[4];
@@ -212,6 +211,23 @@ namespace KD_Real
                 {
                     buld.Append(block[i]);// = buld.ToString().Substring(start, end);
                     //start += end;
+                }
+                string _buf = buld.ToString();
+                buld.Clear();
+                //Удаляем лишнее
+                foreach (var item in _buf)
+                {
+                    if (item != '~')
+                    {
+                        buld.Append(item); 
+                    }
+                }
+
+                //тут вставляем символ пароля в сообщение начиная с нулевой позиции, затем + 2
+                for (int i = 0; i < PLength; i++, start += 2)
+                {
+                    if (start >= buld.Length) start = 0;
+                    buld.Insert(start, PassLength[i]);
                 }
                 //block[3] = buld.ToString().Substring(start);
                 //Выдираем символы пароля из строки/**///возможно дыра
@@ -311,7 +327,7 @@ namespace KD_Real
 	 internal class PassChar
     {
         private char C;
-        internal string sLib = @"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNMЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИЙйТЬБЮцукенгшщзхъфывапролджэячсмитьбю1234567890?!.,():; ";
+        internal string sLib = @"qwertyuiopasdfghjklzxcvbnmQW~_ERTYUIOPASDFGHJKLZXCёVBNMЦУКЕНГШЩЗХЪФЫВА=ПРОЛДЖЭЯЧСМИЙйТЬБЮцукенгшщзхъЁфывапролджэячсмитьбю1234567890?!.,([]{}/*-+):; ";
         
         public PassChar()
         {

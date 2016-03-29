@@ -2,4 +2,3 @@ C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\b
 C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\bin\Release\KD_Real.pdb
 C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Release\KD_Real.dll
 C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Release\KD_Real.pdb
-C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Release\KD_Real.csprojResolveAssemblyReference.cache
