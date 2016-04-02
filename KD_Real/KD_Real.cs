@@ -341,7 +341,7 @@ namespace KD_Real
                 str = " ";
             }
 
-            pass = pass.Length.ToString() + pass + pass.Length.ToString()[0];            
+            //pass = pass.Length.ToString() + pass + pass.Length.ToString()[0];            
             pass = ChangePassString(pass);
 
             if (b)
