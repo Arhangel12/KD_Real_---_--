@@ -133,23 +133,51 @@ namespace KD_Real
         ///Блочное перемешивание байт сообщения
         /// </summary>
         /// <param name="str">Сообщение для перемешивания</param>
-        /// <param name="PassLength">Пароль</param>
+        /// <param name="Pass">Пароль</param>
         /// <param name="Mixing">Микс он/офф</param>
         /// <returns>Строка после перемешивания</returns>
-        private string MIX(string str, string PassLength, bool Mixing)
+        private string MIX(string str, string Pass, bool Mixing)
         {
-            int end = str.Length, start = 0, PLength = PassLength.Length;
+            int end = str.Length, start = 0, PLength = Pass.Length;
             StringBuilder buld = new StringBuilder(str);
             if(PLength < 5)PLength = 5;
             if (Mixing)
             {
+                Random r = new Random(DateTime.Now.Millisecond);
+                for (int i = 0; i < Pass.Length; i++)
+                {
+                    buld.Insert(0, r.Next(0,9));
+                }
+                switch (buld[0])
+                {
+                    case '0':
+                    case '1':
+                    case '2':
+                        buld.Append(r.Next(0, 9));
+                        break;
+                    case '3':
+                    case '4':
+                    case '5':
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        break;
+                    case '6':
+                    case '7':
+                    case '8':
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        break;
+                    default:
+                        break;
+                }
                 //тут вставляем символ пароля в сообщение начиная с нулевой позиции, затем + 2
-                for (int i = 0; i < PLength; i++, start+=2)
+                /*for (int i = 0; i < PLength; i++, start+=2)
                 {
                     if(start >= buld.Length) start = 0;
-                    buld.Insert(start, PassLength[i]);
-                }
-                if (buld.Length < 4) buld.Append('~', 4);
+                    buld.Insert(start, Pass[i]);
+                }*/
+                if (buld.Length < 4) buld.Append('.', 4);
                 end = buld.Length/4;
                 start = 0;
                 string[] block = new string[4];
@@ -179,11 +207,55 @@ namespace KD_Real
                     block[2] = block[1];
                     block[1] = buf;
                 }
+                buld.Clear();
+                foreach (var item in block)
+                {
+                    buld.Append(item);
+                }
+                buld.Append('.');
             }
                 //расшифровываем
             else
             {
+                //
+
+                buld.Remove(buld.Length - 1, 1);
                 string[] block = new string[4];
+                end = buld.Length / 4;
+                start = 0;
+                //
+                int dl = buld.Length - end * 3;
+                if (PLength % 2 == 0)
+                {
+                    block[0] = buld.ToString().Substring(start, end);
+                    start += end;
+                    block[1] = buld.ToString().Substring(start, dl);
+                    start += dl;
+                    block[2] = buld.ToString().Substring(start, end);
+                    start += end;
+                    block[3] = buld.ToString().Substring(start, end);
+                    start += end;
+                }
+                else
+                {
+                    block[0] = buld.ToString().Substring(start, dl);
+                    start += dl;
+                    block[1] = buld.ToString().Substring(start, end);
+                    start += end;
+                    block[2] = buld.ToString().Substring(start, end);
+                    start += end;
+                    block[3] = buld.ToString().Substring(start, end);
+                    start += end;
+                }
+                /*for (int i = 0; i < 3; i++)
+                {
+                    block[i] = buld.ToString().Substring(start, end);
+                    start += end;
+                }
+                block[3] = buld.ToString().Substring(start);*/
+
+                //
+
                 if (PLength % 2 == 0)
                 {
                     string buf;
@@ -205,30 +277,51 @@ namespace KD_Real
                     block[2] = buf;
                 }
                 //размекшировали
-                //start = 0; end = buld.Length / 4;
+
                 buld.Clear();
                 for (int i = 0; i < 4; i++)
                 {
                     buld.Append(block[i]);// = buld.ToString().Substring(start, end);
                     //start += end;
                 }
-                string _buf = buld.ToString();
-                buld.Clear();
+                switch (buld[0])
+                {
+                    case '0':
+                    case '1':
+                    case '2':
+                        buld.Remove(buld.Length - 1,1);
+                        break;
+                    case '3':
+                    case '4':
+                    case '5':
+                        buld.Remove(buld.Length - 2, 2);
+                        break;
+                    case '6':
+                    case '7':
+                    case '8':
+                        buld.Remove(buld.Length - 3, 3);
+                        break;
+                    default:
+                        break;
+                }
+                buld.Remove(0, Pass.Length);
+                /*string _buf = buld.ToString();
+                buld.Clear();*/
                 //Удаляем лишнее
-                foreach (var item in _buf)
+                /*foreach (var item in _buf)
                 {
                     if (item != '~')
                     {
                         buld.Append(item); 
                     }
-                }
+                }*/
 
                 //тут вставляем символ пароля в сообщение начиная с нулевой позиции, затем + 2
-                for (int i = 0; i < PLength; i++, start += 2)
+                /*for (int i = 0; i < PLength; i++, start += 2)
                 {
                     if (start >= buld.Length) start = 0;
-                    buld.Insert(start, PassLength[i]);
-                }
+                    buld.Insert(start, Pass[i]);
+                }*/
                 //block[3] = buld.ToString().Substring(start);
                 //Выдираем символы пароля из строки/**///возможно дыра
 
@@ -248,16 +341,22 @@ namespace KD_Real
                 str = " ";
             }
 
-            pass = str.Length.ToString() + pass.Length.ToString() + pass;            
+            pass = pass.Length.ToString() + pass + pass.Length.ToString()[0];            
             pass = ChangePassString(pass);
 
             if (b)
             {
+                /*str = MIX(str, pass, true);
+                str = ON(ON(ChangeText(str), pass), pass);*/
+                str = MIX(str, pass, true);
                 return ON(ON(ChangeText(str), pass), pass);
             }
             else
             {
-                return ReChangeText(OFF(OFF(str, pass), pass));
+                /*str = ReChangeText(OFF(OFF(str, pass), pass));
+                str = MIX(str, pass, false);*/
+                str = ReChangeText(OFF(OFF(str, pass), pass));
+                return MIX(str, pass, false);
             }
         }
 
@@ -327,7 +426,7 @@ namespace KD_Real
 	 internal class PassChar
     {
         private char C;
-        internal string sLib = @"qwertyuiopasdfghjklzxcvbnmQW~_ERTYUIOPASDFGHJKLZXCёVBNMЦУКЕНГШЩЗХЪФЫВА=ПРОЛДЖЭЯЧСМИЙйТЬБЮцукенгшщзхъЁфывапролджэячсмитьбю1234567890?!.,([]{}/*-+):; ";
+        internal string sLib = @"qwertyuiopasdfghjklzxcvbnmQW_ERTYUIOPASDFGHJKLZXCёVBNMЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИЙйТЬБЮцукенгшщзхъЁфывапролджэячсмитьбю1234567890?!.,([]{}):; ";
         
         public PassChar()
         {
