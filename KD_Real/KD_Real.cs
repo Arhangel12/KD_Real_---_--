@@ -146,7 +146,12 @@ namespace KD_Real
                 Random r = new Random(DateTime.Now.Millisecond);
                 for (int i = 0; i < Pass.Length; i++)
                 {
-                    buld.Insert(0, r.Next(0,9));
+                    r.Next(0, 9);
+                    r.Next(0, 9);
+                    r.Next(0, 9);
+                    r.Next(0, 9);
+                    r.Next(0, 9);
+                    buld.Insert(0, r.Next(0, 9));
                 }
                 switch (buld[0])
                 {
@@ -193,19 +198,19 @@ namespace KD_Real
                     buf = block[3];
                     block[3] = block[1];
                     block[1] = buf;
-                    buf = block[2];
+                    /*buf = block[2];
                     block[2] = block[0];
-                    block[0] = buf;
+                    block[0] = buf;*/
                 }
                 else
                 {
                     string buf;
-                    buf = block[3];
-                    block[3] = block[0];
-                    block[0] = buf;
                     buf = block[2];
+                    block[2] = block[0];
+                    block[0] = buf;
+                    /*buf = block[2];
                     block[2] = block[1];
-                    block[1] = buf;
+                    block[1] = buf;*/
                 }
                 buld.Clear();
                 foreach (var item in block)
@@ -238,14 +243,20 @@ namespace KD_Real
                 }
                 else
                 {
-                    block[0] = buld.ToString().Substring(start, dl);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        block[i] = buld.ToString().Substring(start, end);
+                        start += end;
+                    }
+                    block[3] = buld.ToString().Substring(start);
+                   /* block[0] = buld.ToString().Substring(start, dl);
                     start += dl;
                     block[1] = buld.ToString().Substring(start, end);
                     start += end;
                     block[2] = buld.ToString().Substring(start, end);
                     start += end;
                     block[3] = buld.ToString().Substring(start, end);
-                    start += end;
+                    start += end;*/
                 }
                 /*for (int i = 0; i < 3; i++)
                 {
@@ -262,19 +273,19 @@ namespace KD_Real
                     buf = block[1];
                     block[1] = block[3];
                     block[3] = buf;
-                    buf = block[0];
+                    /*buf = block[0];
                     block[0] = block[2];
-                    block[2] = buf;
+                    block[2] = buf;*/
                 }
                 else
                 {
                     string buf;
                     buf = block[0];
-                    block[0] = block[3];
-                    block[3] = buf;
-                    buf = block[1];
-                    block[1] = block[2];
+                    block[0] = block[2];
                     block[2] = buf;
+                    /*buf = block[1];
+                    block[1] = block[2];
+                    block[2] = buf;*/
                 }
                 //размекшировали
 
@@ -346,15 +357,15 @@ namespace KD_Real
 
             if (b)
             {
-                /*str = MIX(str, pass, true);
-                str = ON(ON(ChangeText(str), pass), pass);*/
+                str = MIX(str, pass, true);
+                str = ON(ON(ChangeText(str), pass), pass);
                 str = MIX(str, pass, true);
                 return ON(ON(ChangeText(str), pass), pass);
             }
             else
             {
-                /*str = ReChangeText(OFF(OFF(str, pass), pass));
-                str = MIX(str, pass, false);*/
+                str = ReChangeText(OFF(OFF(str, pass), pass));
+                str = MIX(str, pass, false);
                 str = ReChangeText(OFF(OFF(str, pass), pass));
                 return MIX(str, pass, false);
             }
