@@ -157,6 +157,13 @@ namespace KD_Real
                 {
                     case '0':
                     case '1':
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        buld.Append(r.Next(0, 9));
+                        break;
                     case '2':
                         buld.Append(r.Next(0, 9));
                         break;
@@ -299,6 +306,8 @@ namespace KD_Real
                 {
                     case '0':
                     case '1':
+                        buld.Remove(buld.Length - 6, 6);
+                        break;
                     case '2':
                         buld.Remove(buld.Length - 1,1);
                         break;
