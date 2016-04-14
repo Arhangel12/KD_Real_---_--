@@ -352,32 +352,40 @@ namespace KD_Real
 
         public string change(string str, string pass, bool b, string NewLib = "")
         {
-            if (pass.Length == 0)
+            try
             {
-                pass = " ";
-            }
+                if (pass.Length == 0)
+                {
+                    pass = " ";
+                }
 
-            if (str.Length == 0)
-            {
-                str = " ";
-            }
+                if (str.Length == 0)
+                {
+                    str = " ";
+                }
 
-            //pass = pass.Length.ToString() + pass + pass.Length.ToString()[0];            
-            pass = ChangePassString(pass);
+                //pass = pass.Length.ToString() + pass + pass.Length.ToString()[0];            
+                pass = ChangePassString(pass);
 
-            if (b)
-            {
-                str = MIX(str, pass, true);
-                str = ON(ON(ChangeText(str), pass), pass);
-                str = MIX(str, pass, true);
-                return ON(ON(ChangeText(str), pass), pass);
+                if (b)
+                {
+                    str = MIX(str, pass, true);
+                    str = ON(ON(ChangeText(str), pass), pass);
+                    str = MIX(str, pass, true);
+                    return ON(ON(ChangeText(str), pass), pass);
+                }
+                else
+                {
+                    str = ReChangeText(OFF(OFF(str, pass), pass));
+                    str = MIX(str, pass, false);
+                    str = ReChangeText(OFF(OFF(str, pass), pass));
+                    return MIX(str, pass, false);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                str = ReChangeText(OFF(OFF(str, pass), pass));
-                str = MIX(str, pass, false);
-                str = ReChangeText(OFF(OFF(str, pass), pass));
-                return MIX(str, pass, false);
+                System.Diagnostics.Trace.WriteLine(ex.Message);
+                return "Empty or error message";
             }
         }
 
