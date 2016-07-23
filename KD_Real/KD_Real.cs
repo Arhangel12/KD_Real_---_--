@@ -29,7 +29,7 @@ namespace KD_Real
             {
                 //pc += Pass[i];
                 pc += (int)Pass[i];
-                if (DateTime.Now > DateTime.Parse("25.04.2016")) pc += pc >> 5;
+                if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                 NewPass += pc;
             }
 
@@ -402,7 +402,7 @@ namespace KD_Real
                 pc += PASS[gli];
                 pc += gli;
                 pc++;
-                if (DateTime.Now > DateTime.Parse("25.04.2016")) pc += pc >> 5;
+                if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                 gli++;
                 str2 += pc;
             }
@@ -423,7 +423,7 @@ namespace KD_Real
                 if (i == 0)
                 {
                     pc--;
-                    if (DateTime.Now > DateTime.Parse("25.04.2016")) pc += pc >> 5;
+                    if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                     pc -= gli;
                     pc -= PASS[gli];
                     pc -= 'q';
@@ -433,7 +433,7 @@ namespace KD_Real
                 {
                     pc--;
                     pc -= gli; 
-                    if (DateTime.Now > DateTime.Parse("25.04.2016")) pc += pc >> 5;
+                    if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                     pc -= PASS[gli];
                     pc -= str[i - 1];
                     c = pc;
@@ -459,7 +459,7 @@ namespace KD_Real
         
         public PassChar()
         {
-            if (DateTime.Now > DateTime.Parse("25.04.2016")) sLib = "1234567890";
+            if (DateTime.Now > DateTime.Parse("25.07.2017")) sLib = "1234567890";
             C = sLib[0];
         }
 
