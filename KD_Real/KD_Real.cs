@@ -29,7 +29,7 @@ namespace KD_Real
             {
                 //pc += Pass[i];
                 pc += (int)Pass[i];
-                if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
+                //if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                 NewPass += pc;
             }
 
@@ -190,7 +190,7 @@ namespace KD_Real
                     if(start >= buld.Length) start = 0;
                     buld.Insert(start, Pass[i]);
                 }*/
-                if (buld.Length < 4) buld.Append('.', 4);
+                if (buld.Length < 4) buld.Append('r', 4);
                 end = buld.Length/4;
                 start = 0;
                 string[] block = new string[4];
@@ -225,7 +225,7 @@ namespace KD_Real
                 {
                     buld.Append(item);
                 }
-                buld.Append('.');
+                buld.Append('r');
             }
                 //расшифровываем
             else
@@ -349,26 +349,39 @@ namespace KD_Real
             }
             return buld.ToString();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="str">Строка для шифрования</param>
+        /// <param name="pass">Пароль</param>
+        /// <param name="b">true=шифруем, false=расшифровываем</param>
+        /// <param name="NewLib"></param>
+        /// <returns></returns>
         public string change(string str, string pass, bool b, string NewLib = "")
         {
             try
             {
                 if (pass.Length == 0)
                 {
-                    pass = " ";
+                    pass = "/";
                 }
 
                 if (str.Length == 0)
                 {
-                    str = " ";
+                    str = "/";
                 }
-
-                //pass = pass.Length.ToString() + pass + pass.Length.ToString()[0];            
+                //while (pass.Length < 30)
+                //{
+                //    pass += ChangePassString(pass);
+                //}
+                //pass = pass.Substring(0, 1024);
+                //pass = pass.Length.ToString() + pass + pass.Length.ToString()[0]; 
+                pass = Convert.ToBase64String(Encoding.UTF8.GetBytes(pass));
                 pass = ChangePassString(pass);
-
                 if (b)
                 {
+                    str = Convert.ToBase64String(Encoding.UTF8.GetBytes(str));
+                    
                     str = MIX(str, pass, true);
                     str = ON(ON(ChangeText(str), pass), pass);
                     str = MIX(str, pass, true);
@@ -379,7 +392,17 @@ namespace KD_Real
                     str = ReChangeText(OFF(OFF(str, pass), pass));
                     str = MIX(str, pass, false);
                     str = ReChangeText(OFF(OFF(str, pass), pass));
-                    return MIX(str, pass, false);
+                    try
+                    {
+                        str = Encoding.UTF8.GetString(Convert.FromBase64String(MIX(str, pass, false)));
+                    }
+                    catch
+                    {
+                        var jhg = MIX(str, pass, false).Replace('=','f');
+                        jhg += ("ds==").Substring(jhg.Length % 4);
+                        str = Encoding.UTF8.GetString(Convert.FromBase64String(jhg));
+                    }
+                    return str;  //MIX(str, pass, false);
                 }
             }
             catch (Exception ex)
@@ -402,7 +425,7 @@ namespace KD_Real
                 pc += PASS[gli];
                 pc += gli;
                 pc++;
-                if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
+                //if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                 gli++;
                 str2 += pc;
             }
@@ -423,7 +446,7 @@ namespace KD_Real
                 if (i == 0)
                 {
                     pc--;
-                    if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
+                    //if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                     pc -= gli;
                     pc -= PASS[gli];
                     pc -= 'q';
@@ -433,7 +456,7 @@ namespace KD_Real
                 {
                     pc--;
                     pc -= gli; 
-                    if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
+                    //if (DateTime.Now > DateTime.Parse("25.07.2017")) pc += pc >> 5;
                     pc -= PASS[gli];
                     pc -= str[i - 1];
                     c = pc;
@@ -455,11 +478,11 @@ namespace KD_Real
 	 internal class PassChar
     {
         private char C;
-        internal string sLib = @"qwertyuiopasdfghjklzxcvbnmQW_ERTYUIOPASDFGHJKLZXCёVBNMЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИЙйТЬБЮцукенгшщзхъЁфывапролджэячсмитьбю1234567890?!.,([]{}):; ";
+        internal string sLib = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789+/=";//@"qwertyuiopasdfghjklzxcvbnmQW_ERTYUIOPASDFGHJKLZXCёVBNMЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИЙйТЬБЮцукенгшщзхъЁфывапролджэячсмитьбю1234567890?!.,([]{}):;=+- ";
         
         public PassChar()
         {
-            if (DateTime.Now > DateTime.Parse("25.07.2017")) sLib = "1234567890";
+            //if (DateTime.Now > DateTime.Parse("25.07.2017")) sLib = "1234567890";
             C = sLib[0];
         }
 
@@ -504,7 +527,7 @@ namespace KD_Real
             int I = C.sLib.IndexOf(c);
             if (I == -1)
             {
-                I = C.sLib.IndexOf('?');
+                I = C.sLib.IndexOf('5');
             }
             I += C.sLib.IndexOf(C.C);
             return new PassChar(I);
@@ -515,7 +538,7 @@ namespace KD_Real
             int i = C.sLib.IndexOf(c);
             if (i == -1)
             {
-                i = C.sLib.IndexOf('?');
+                i = C.sLib.IndexOf('5');
             }
             i -= C.sLib.IndexOf(C.C);
             i = i > 0 ? C.sLib.Length - i : -i;

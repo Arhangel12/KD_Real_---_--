@@ -13,3 +13,13 @@ C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\b
 C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.csprojResolveAssemblyReference.cache
 C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.dll
 C:\Users\Инесса\Desktop\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.pdb
+D:\проги\Новая папка\Работа с БД\KD_Real_для_ВК\KD_Real\bin\Debug\KD_Real.dll
+D:\проги\Новая папка\Работа с БД\KD_Real_для_ВК\KD_Real\bin\Debug\KD_Real.pdb
+D:\проги\Новая папка\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.dll
+D:\проги\Новая папка\Работа с БД\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.pdb
+I:\проги\Чат для вк\KD_Real_для_ВК\KD_Real\bin\Debug\KD_Real.dll
+I:\проги\Чат для вк\KD_Real_для_ВК\KD_Real\bin\Debug\KD_Real.pdb
+I:\проги\Чат для вк\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.csproj.AssemblyReference.cache
+I:\проги\Чат для вк\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.csproj.CoreCompileInputs.cache
+I:\проги\Чат для вк\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.dll
+I:\проги\Чат для вк\KD_Real_для_ВК\KD_Real\obj\Debug\KD_Real.pdb
